@@ -3,20 +3,6 @@ snapshots
 
 the learn-to-become-a-dev workshop's imgur clone
 
-Installing
-====
-
-``` bash
-git clone git@github.2ndsiteinc.com:marguerite/snapshots.git
-cd snapshots
-curl -s https://getcomposer.org/installer | php
-php composer.phar install
-cp app/
-cp .htaccess.example .htaccess
-```
-
-Point your browser at the app/ directory.
-
 Running on Mountain Lion:
 ====
 
@@ -58,15 +44,34 @@ Restart apache:
 sudo apachectl restart
 ```
 
-Follow the installation instructions above, cloning the snapshots
-repo into your ~/Sites directory.
+Now, before you follow the installation instructions below, first
 
-Point your browser at http://localhost/$your_username/snapshots/app
+``` bash
+cd ~/Sites
+```
+
+Then, when you are done following the installation instructions,
+point your browser at `http://localhost/~<your_username>/snapshots/app`
 and you should see a "hello world" page with an awesome misspelling of snapshots.
 
-You might need to uncomment the `RewriteBase` line in `app/.htaccess` if
-http://localhost/$your_username/snapshots/app doesn't work but
-http://localhost/$your_username/snapshots/app/bootstrap.php does.
+If `http://localhost/~<your_username>/snapshots/app/bootstrap.php` works but
+`http://localhost/$your_username/snapshots/app` doesn't, then you should
+edit app/.htaccess and follow the instructions in the comment there.
+
+Installing
+====
+
+``` bash
+git clone git@github.2ndsiteinc.com:marguerite/snapshots.git
+cd snapshots
+curl -s https://getcomposer.org/installer | php
+php composer.phar install
+cp app/
+cp .htaccess.example .htaccess
+```
+
+Point your browser at the app/ directory.
+
 
 Permissions
 ====
@@ -77,9 +82,9 @@ is `_www`, but that might not be the case, especially if you're trying this on l
 
 ``` bash
 cd ~/Sites/snapshots
-chown :_www .
+sudo chown :_www .
 chmod g+r .
-chown -R :_www logs cache app vendor
+sudo chown -R :_www logs cache app vendor templates
 chmod g+wr logs cache
-chmod g-r -R logs/README.md cache/README.md .git .gitignore README.md
+chmod -R g-r logs/README.md cache/README.md .git .gitignore README.md
 ```
