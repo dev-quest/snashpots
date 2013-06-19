@@ -1,0 +1,7 @@
+composer.phar
+vendor
+cache/*
+!cache/README.md
+logs/*
+!logs/README.md
+.htaccess

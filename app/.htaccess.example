@@ -1,0 +1,13 @@
+RewriteEngine On
+
+# uncomment this line (and replace des4maisons with your username)
+# if you are trying to run the app on OSX and localhost/~username/snapshots/app
+# doesn't work but localhost/~username/snapshots/app/bootstrap.php does
+#
+# RewriteBase /~des4maisons/snapshots/app
+
+
+# these rules say that if a request comes in for a file that doesn't
+# exist, redirict them to boostrap.php so that slim can handle the request.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ bootstrap.php [QSA,L]
