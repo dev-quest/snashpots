@@ -63,8 +63,8 @@ Installing
 ====
 
 ```bash
-git clone git@github.2ndsiteinc.com:marguerite/snapshots.git
-cd snapshots
+git clone git@github.com:dev-quest/snashpots.git
+cd snashpots
 curl -s https://getcomposer.org/installer | php -d detect_unicode=Off
 php composer.phar install
 cd app/
@@ -94,7 +94,7 @@ on some of the files. (The following assumes that the user under which apache is
 is `_www`, but that might not be the case, especially if you're trying this on linux.)
 
 ``` bash
-cd ~/Sites/snapshots
+cd ~/Sites/snashpots
 sudo chown :_www .
 chmod g+r .
 sudo chown -R :_www logs cache app vendor templates
