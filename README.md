@@ -1,16 +1,17 @@
-snapshots
+snashpots
 =========
 
 the learn-to-become-a-dev workshop's imgur clone
 
 Running on Mountain Lion:
-====
+========================
 
-Mountain lion got rid of the ~/Sites directory so you'll need to
+Mountain Lion got rid of the ~/Sites directory so you'll need to
 do a bit of monkeying around in order to get this up and running.
+
 ``` bash
 mkdir ~/Sites
-chown :_www ~/Sites
+sudo chown :_www ~/Sites
 ```
 
 Then create (or reconfigure) the apache config file that
@@ -51,26 +52,38 @@ cd ~/Sites
 ```
 
 Then, when you are done following the installation instructions,
-point your browser at `http://localhost/~<your_username>/snapshots/app`
-and you should see a "hello world" page with an awesome misspelling of snapshots.
+point your browser at `http://localhost/~<your_username>/snashpots/app`
+and you should see a "hello world" page with an awesome misspelling of snashpots.
 
-If `http://localhost/~<your_username>/snapshots/app/bootstrap.php` works but
-`http://localhost/$your_username/snapshots/app` doesn't, then you should
+If `http://localhost/~<your_username>/snashpots/app/bootstrap.php` works but
+`http://localhost/$your_username/snashpots/app` doesn't, then you should
 edit app/.htaccess and follow the instructions in the comment there.
 
 Installing
 ====
 
-``` bash
+```bash
 git clone git@github.2ndsiteinc.com:marguerite/snapshots.git
 cd snapshots
-curl -s https://getcomposer.org/installer | php
+curl -s https://getcomposer.org/installer | php -d detect_unicode=Off
 php composer.phar install
-cp app/
+cd app/
 cp .htaccess.example .htaccess
 ```
 
 Point your browser at the app/ directory.
+
+If you see a plaintext PHP file, you should do: 
+
+```bash
+$ sudo vim /etc/apache2/httpd.conf
+```
+
+And uncomment this line:
+
+```
+#LoadModule php5_module libexec/apache2/libphp5.so  
+```
 
 
 Permissions
