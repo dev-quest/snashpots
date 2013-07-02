@@ -53,7 +53,7 @@ cd ~/Sites
 
 Then, when you are done following the installation instructions,
 point your browser at `http://localhost/~<your_username>/snashpots/app`
-and you should see a "hello world" page with an awesome misspelling of snashpots.
+and you should see a "hello world" page with an awesome misspelling of snapshots.
 
 If `http://localhost/~<your_username>/snashpots/app/bootstrap.php` works but
 `http://localhost/$your_username/snashpots/app` doesn't, then you should
