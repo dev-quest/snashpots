@@ -101,3 +101,26 @@ sudo chown -R :_www logs cache app vendor templates
 chmod g+wr logs cache
 chmod -R g-r logs/README.md cache/README.md .git .gitignore README.md
 ```
+
+Adding Upstream Repo To Your Fork
+===
+
+If you are working from a fork you may want to add Marg's repo as an upstream remote, since this will be our 
+canonical, shared master repo.
+
+To do so you can edit your .git/config file and add:
+
+```bash
+[remote "upstream"]
+    url = git@github.com:dev-quest/snashpots.git
+    fetch = +refs/heads/*:refs/remotes/upstream/*
+```
+
+Additionally you may want to add an alias to pull from Marg's repo to update your fork. This is mine ('git pu' pulls from 
+upstream, 'git pull' just pulls from my own fork).
+
+```bash
+[alias]
+    pu = !"git fetch origin -v; git fetch upstream -v; git merge upstream/master"
+```
+
