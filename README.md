@@ -1,7 +1,7 @@
 snashpots
 =========
 
-the learn-to-become-a-dev workshop's imgur clone
+image sharing website
 
 Running on Mountain Lion:
 ========================
@@ -24,7 +24,7 @@ sudo vim /etc/apache2/users/$(whoami).conf
 Edit the file to contain this:
 
 ``` config
-<Directory "/Users/$your_username/Sites/">
+<Directory "/Users/<your_username>/Sites/">
     Options Indexes MultiViews +FollowSymLinks
     AllowOverride All
     Order allow,deny
@@ -55,8 +55,8 @@ Then, when you are done following the installation instructions,
 point your browser at `http://localhost/~<your_username>/snashpots/app`
 and you should see a "hello world" page with an awesome misspelling of snapshots.
 
-If `http://localhost/~<your_username>/snashpots/app/bootstrap.php` works but
-`http://localhost/$your_username/snashpots/app` doesn't, then you should
+If `http://localhost/~<your_username>/snapshots/app/bootstrap.php` works but
+`http://localhost/~<your_username>/snapshots/app` doesn't, then you should
 edit app/.htaccess and follow the instructions in the comment there.
 
 Installing
