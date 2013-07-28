@@ -4,7 +4,7 @@ RewriteEngine On
 # if you are trying to run the app on OSX and localhost/~username/snapshots/app
 # doesn't work but localhost/~username/snapshots/app/bootstrap.php does
 #
-# RewriteBase /~des4maisons/snapshots/app
+# RewriteBase /~des4maisons/snashpots/app
 
 
 # these rules say that if a request comes in for a file that doesn't

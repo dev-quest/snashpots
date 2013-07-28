@@ -4,13 +4,14 @@ snashpots
 image sharing website
 
 Running on Mountain Lion:
-====
+========================
 
-Mountain lion got rid of the ~/Sites directory so you'll need to
+Mountain Lion got rid of the ~/Sites directory so you'll need to
 do a bit of monkeying around in order to get this up and running.
+
 ``` bash
 mkdir ~/Sites
-chown :_www ~/Sites
+sudo chown :_www ~/Sites
 ```
 
 Then create (or reconfigure) the apache config file that
@@ -51,7 +52,7 @@ cd ~/Sites
 ```
 
 Then, when you are done following the installation instructions,
-point your browser at `http://localhost/~<your_username>/snapshots/app`
+point your browser at `http://localhost/~<your_username>/snashpots/app`
 and you should see a "hello world" page with an awesome misspelling of snapshots.
 
 If `http://localhost/~<your_username>/snapshots/app/bootstrap.php` works but
@@ -61,16 +62,28 @@ edit app/.htaccess and follow the instructions in the comment there.
 Installing
 ====
 
-``` bash
-git clone git@github.2ndsiteinc.com:marguerite/snapshots.git
-cd snapshots
-curl -s https://getcomposer.org/installer | php
+```bash
+git clone git@github.com:dev-quest/snashpots.git
+cd snashpots
+curl -s https://getcomposer.org/installer | php -d detect_unicode=Off
 php composer.phar install
-cp app/
+cd app/
 cp .htaccess.example .htaccess
 ```
 
 Point your browser at the app/ directory.
+
+If you see a plaintext PHP file, you should do: 
+
+```bash
+$ sudo vim /etc/apache2/httpd.conf
+```
+
+And uncomment this line:
+
+```
+#LoadModule php5_module libexec/apache2/libphp5.so  
+```
 
 
 Permissions
@@ -81,7 +94,7 @@ on some of the files. (The following assumes that the user under which apache is
 is `_www`, but that might not be the case, especially if you're trying this on linux.)
 
 ``` bash
-cd ~/Sites/snapshots
+cd ~/Sites/snashpots
 sudo chown :_www .
 chmod g+r .
 sudo chown -R :_www logs cache app vendor templates
