@@ -3,8 +3,54 @@ snashpots
 
 image sharing website
 
-Running on Mountain Lion:
-========================
+
+## Running from the pre-build virtual machine (Recommended) ##
+
+1. install [vagrant](http://downloads.vagrantup.com/tags/v1.2.4)
+1. run this:
+
+``` bash
+# run this from the snashpots project directory
+vagrant up
+```
+
+That's it! You should now be able to navigate to 192.168.56.50 in your browser
+and see a "hello world" page served by Slim.
+
+The `vagrant up` command spins up a virtualmachine and configures it to
+serve our snashpots website. Having a virtual machine running consumes
+resources on your computer, though, so you should shut it down when you're not
+using it:
+
+``` bash
+vagrant halt
+```
+
+`vagrant resume` starts it up again.
+
+### SSH-ing into the virtual machine for development ###
+
+``` bash
+cat <<EOF >> ~/.ssh/config
+Host snashpots
+    HostName 192.168.56.50
+    User snashpots
+EOF
+```
+
+and now ssh into the box:
+
+``` bash
+ssh snashpots
+# password is snashpots
+```
+
+
+## Running on Mountain Lion ##
+
+You only need to do this if for some reason you don't want to use vagrant.
+
+### Making a directory that apache can access ###
 
 Mountain Lion got rid of the ~/Sites directory so you'll need to
 do a bit of monkeying around in order to get this up and running.
@@ -51,16 +97,10 @@ Now, before you follow the installation instructions below, first
 cd ~/Sites
 ```
 
-Then, when you are done following the installation instructions,
-point your browser at `http://localhost/~<your_username>/snashpots/app`
-and you should see a "hello world" page with an awesome misspelling of snapshots.
 
-If `http://localhost/~<your_username>/snapshots/app/bootstrap.php` works but
-`http://localhost/~<your_username>/snapshots/app` doesn't, then you should
-edit app/.htaccess and follow the instructions in the comment there.
+### Installing the code ###
 
-Installing
-====
+#### Downloading ####
 
 ```bash
 git clone git@github.com:dev-quest/snashpots.git
@@ -71,27 +111,10 @@ cd app/
 cp .htaccess.example .htaccess
 ```
 
-Point your browser at the app/ directory.
-
-If you see a plaintext PHP file, you should do: 
-
-```bash
-$ sudo vim /etc/apache2/httpd.conf
-```
-
-And uncomment this line:
-
-```
-#LoadModule php5_module libexec/apache2/libphp5.so  
-```
+Then, `vim .htaccess`. There are some instructions in the comments. Follow them.
 
 
-Permissions
-====
-
-If you get forbidden errors or 500 errors, you might need to change the permissions
-on some of the files. (The following assumes that the user under which apache is running
-is `_www`, but that might not be the case, especially if you're trying this on linux.)
+#### Fixing permissions ####
 
 ``` bash
 cd ~/Sites/snashpots
@@ -102,45 +125,24 @@ chmod g+wr logs cache
 chmod -R g-r logs/README.md cache/README.md .git .gitignore README.md
 ```
 
-Running from the pre-build virtual machine
-===
 
-1. install [vagrant](http://downloads.vagrantup.com/tags/v1.2.4)
-1. run this:
+#### Testing it out ####
 
-``` bash
-# run this from the snashpots project directory
-vagrant up
+First go to `http://localhost/~<your_username>/snapshots/app/boostrap.php`
+in your browser.  If you see a plaintext PHP file, you don't have php
+enabled in apache. To enable it:
+
+```bash
+sudo vim /etc/apache2/httpd.conf
 ```
 
-That's it! You should now be able to navigate to 192.168.56.50 in your browser
-and see a "hello world" page served by Slim.
+And uncomment this line:
 
-The `vagrant up` command spins up a virtualmachine and configures it to
-serve our snashpots website. Having a virtual machine running consumes
-resources on your computer, though, so you should shut it down when you're not
-using it:
-
-``` bash
-vagrant halt
+```
+#LoadModule php5_module libexec/apache2/libphp5.so  
 ```
 
-`vagrant resume` starts it up again.
-
-SSH-ing into the virtual machine to play around
----
-
-``` bash
-cat <<EOF >> ~/.ssh/config
-Host snashpots
-    HostName 192.168.56.50
-    User snashpots
-EOF
-```
-
-and now ssh into the box:
-
-``` bash
-ssh snashpots
-# password is snashpots
-```
+Reload the page in your browser. You should now see a properly rendered 
+(albeit simple) html page saying "hello world". Once this works, try going to
+`http://localhost/~<your_username>/snashpots/app` and you should once again
+see "Hello World".
