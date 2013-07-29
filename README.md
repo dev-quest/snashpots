@@ -6,11 +6,17 @@ image sharing website
 
 ## Running from the pre-build virtual machine (Recommended) ##
 
-1. install [vagrant](http://downloads.vagrantup.com/tags/v1.2.4)
-1. run this:
+1. Install [virtualbox](https://www.virtualbox.org/).
+1. Add a host-only network adapter to virtualbox
+(see [instructions](http://superuser.com/questions/429405/how-can-i-get-virtualbox-to-run-with-a-hosts-only-adapter#answer-429410)).
+1. Double click on vboxnet0. Give it the IP address `192.168.56.1` and the
+subnet mask `255.255.255.0`, and make sure the DHCP server is disabled.
+1. Install [vagrant](http://downloads.vagrantup.com/tags/v1.2.4).
+1. Run this:
 
 ``` bash
-# run this from the snashpots project directory
+git clone git@github.com:dev-quest/snashpots.git
+cd snashpots
 vagrant up
 ```
 
