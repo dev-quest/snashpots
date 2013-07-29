@@ -60,14 +60,14 @@ mkdir ~/Sites
 sudo chown :_www ~/Sites
 ```
 
-Then create (or reconfigure) the apache config file that
-allows sites to be served from the ~/Sites directory:
+Then edit `/etc/apache2/users/$(whoami).conf`, which is the apache
+config file that allows sites to be served from the ~/Sites directory:
 
 ``` bash
 sudo vim /etc/apache2/users/$(whoami).conf
 ```
 
-Edit the file to contain this:
+Make this file contain the following:
 
 ``` config
 <Directory "/Users/<your_username>/Sites/">
@@ -78,8 +78,8 @@ Edit the file to contain this:
 </Directory>
 ```
 
-In particular, if the file already exists, these 2 configurations
-should be updated:
+If the file already existed for you, make sure you update these
+2 configurations:
 
 ``` config
     Options Indexes MultiViews +FollowSymLinks
@@ -87,22 +87,17 @@ should be updated:
 ```
 
 Restart apache:
+
 ``` bash
 sudo apachectl restart
 ```
-
-Now, before you follow the installation instructions below, first
-
-``` bash
-cd ~/Sites
-```
-
 
 ### Installing the code ###
 
 #### Downloading ####
 
 ```bash
+cd ~/Sites
 git clone git@github.com:dev-quest/snashpots.git
 cd snashpots
 curl -s https://getcomposer.org/installer | php -d detect_unicode=Off
