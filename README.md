@@ -101,3 +101,46 @@ sudo chown -R :_www logs cache app vendor templates
 chmod g+wr logs cache
 chmod -R g-r logs/README.md cache/README.md .git .gitignore README.md
 ```
+
+Running from the pre-build virtual machine
+===
+
+1. install [vagrant](http://downloads.vagrantup.com/tags/v1.2.4)
+1. run this:
+
+``` bash
+# run this from the snashpots project directory
+vagrant up
+```
+
+That's it! You should now be able to navigate to 192.168.56.50 in your browser
+and see a "hello world" page served by Slim.
+
+The `vagrant up` command spins up a virtualmachine and configures it to
+serve our snashpots website. Having a virtual machine running consumes
+resources on your computer, though, so you should shut it down when you're not
+using it:
+
+``` bash
+vagrant halt
+```
+
+`vagrant resume` starts it up again.
+
+SSH-ing into the virtual machine to play around
+---
+
+``` bash
+cat <<EOF >> ~/.ssh/config
+Host snashpots
+    HostName 192.168.56.50
+    User snashpots
+EOF
+```
+
+and now ssh into the box:
+
+``` bash
+ssh snashpots
+# password is snashpots
+```
